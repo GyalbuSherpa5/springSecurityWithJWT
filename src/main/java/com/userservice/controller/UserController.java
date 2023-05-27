@@ -36,7 +36,7 @@ public class UserController {
         return "role added to the user";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/users/getAll")
     public List<UserResponse> getAllUser() {
         return userService.getAllUsers();
     }

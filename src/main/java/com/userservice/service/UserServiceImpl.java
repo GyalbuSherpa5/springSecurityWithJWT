@@ -9,6 +9,7 @@ import com.userservice.repository.RoleRepository;
 import com.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +23,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserToResponseMapper userToResponseMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void saveUser(User user) {
         log.info("saving new user {} to the database", user.getName());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
